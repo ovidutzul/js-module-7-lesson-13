@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JS Module 7 - Lesson 13</title>
+    <style>
+      /* #myArticle {
+        padding: 100px;
+        background-color: tomato;
+      }
+
+      #myDiv {
+        padding: 100px;
+        background-color: darkseagreen;
+      } */
+    </style>
+  </head>
+  <body>
+    <!-- <article id="myArticle">
+      <div id="myDiv">
+        <button id="myButton">Button</button>
+      </div>
+    </article> -->
+
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Nume</th>
+          <th>Prenume</th>
+          <th>Email</th>
+          <th>Phone</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+    
+    <script>
+      function redirectToUser(userId) {
+        alert(`Redirect to user ${userId} page`);
+      }
+
+      function openDialogEmail(userId) {
+        alert(`Email to user ${userId}`);
+      }
+
+      const arr = [
+        {
+          nume: 'Popescu',
+          prenume: 'Alex',
+          email: 'alex.popescu@email.com',
+          phone: 'bla bla bla'
+        },
+        {
+          nume: 'Ionescu',
+          prenume: 'Maria',
+          email: 'maria.ionescu@email.com',
+          phone: '07 bla bla bla'
+        }
+      ];
+      let tableString = '';
+      const tbodyElement = document.querySelector("tbody");
+      arr.forEach((personObj, personIndex) => {
+        const trElement = document.createElement("tr");
+        trElement.dataset.userId = personIndex;
+        const keys = Object.keys(personObj);
+        keys.forEach((key) => {
+          const textValue = personObj[key];
+          const tdElement = document.createElement("td");
+          tdElement.textContent = textValue;
+          
+          if (key === "email") {
+            tdElement.addEventListener("click", (e) => {
+              openDialogEmail(personIndex);
+              e.stopPropagation();
+            })
+          }
+
+          trElement.append(tdElement);
+        });
+        tbodyElement.append(trElement);
+      });
+
+      tbodyElement.addEventListener("click", (e) => {
+        const { userId } = e.target.parentElement.dataset;
+        redirectToUser(userId);
+      });
+    </script>
+
+    <script type="text/javascript" src="./js/script.js"></script>
+  </body>
+</html>
